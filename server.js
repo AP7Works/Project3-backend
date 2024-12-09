@@ -19,8 +19,6 @@ app.use(cors({
 async function connectDB() {
   try {
     await mongoose.connect('mongodb+srv://annaparaczky:AWYSjKrCIJJ4pMpP@cluster0.22msy.mongodb.net/musicapp?retryWrites=true&w=majority', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
       bufferCommands: false,  // Disable buffering (ensures queries are only made after connection)
     });
     console.log('Connected to MongoDB');
