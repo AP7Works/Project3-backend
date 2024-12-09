@@ -1,14 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const songRoutes = require('./routes/songRoutes');
+const cors = require('cors');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-const cors = require('cors');
 
 // Middleware to parse JSON
 app.use(express.json());
 
-app.use(cors());
+// Configure CORS to allow requests from your frontend
+const allowedOrigins = ['https://project3-frontend-b44x.onrender.com'];
+app.use(cors({
+  origin: allowedOrigins,
+}));
 
 // Connect to MongoDB
 mongoose
