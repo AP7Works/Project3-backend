@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express'); 
 const mongoose = require('mongoose');
 const songRoutes = require('./routes/songRoutes');
 const cors = require('cors');
@@ -15,9 +15,18 @@ app.use(cors({
   origin: allowedOrigins,
 }));
 
-// Connect to MongoDB
+// MongoDB URI
+const mongoURI = 'mongodb+srv://annaparaczky:AWYSjKrCIJJ4pMpP@cluster0.22msy.mongodb.net/musicapp?retryWrites=true&w=majority';
+
+// Connect to MongoDB with updated options
 mongoose
-  .connect('mongodb+srv://annaparaczky:AWYSjKrCIJJ4pMpP@cluster0.22msy.mongodb.net/musicapp?retryWrites=true&w=majority')
+  .connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    connectTimeoutMS: 60000,  // Set connection timeout to 60 seconds
+    socketTimeoutMS: 60000,   // Set socket timeout to 60 seconds
+    bufferCommands: false,    // Disable mongoose's buffering (optional but can help)
+  })
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.error('Connection error', error));
 
